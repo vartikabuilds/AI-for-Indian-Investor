@@ -112,8 +112,8 @@ def analyze_stock(data):
 
     # Explanation
     explanation = f"""
-    📊 Trend: {trend}
-    ⚠️ Risk Level: {risk}
+    Trend: {trend}
+    Risk Level: {risk}
 
     Based on your selected risk profile ({user_risk}),
     the system suggests: {decision}
@@ -149,7 +149,7 @@ from user_profile import get_user_profile
 from visualizer import plot_stock
 
 def main():
-    print("📊 AI Investment Assistant (India)")
+    print("AI Investment Assistant (India)")
 
     ticker = input("\nEnter Stock Symbol (e.g., TCS.NS, INFY.NS): ").upper()
 
@@ -161,7 +161,7 @@ def main():
     # Analyze
     analysis = analyze_stock(data)
 
-    print("\n📈 Stock Analysis:")
+    print("\n Stock Analysis:")
     print(f"Trend: {analysis['trend']}")
     print(f"Risk: {analysis['risk']}")
     print(f"Volatility: {analysis['volatility']}")
@@ -175,7 +175,7 @@ def main():
     # Recommendation
     decision, explanation = recommend(analysis, user)
 
-    print("\n💡 FINAL RECOMMENDATION:", decision)
+    print("\n FINAL RECOMMENDATION:", decision)
     print(explanation)
 
 if __name__ == "__main__":
