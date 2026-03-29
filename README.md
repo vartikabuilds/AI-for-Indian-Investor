@@ -53,7 +53,7 @@ Version Control: Git & GitHub
 Installation & Setup:
 
 Step 1: Clone the repository
-git clone https://github.com/your-username/ai-investor-assistant.git
+git clone https://github.com/vartikabuilds/AI-for-Indian-Investor
 cd ai-investor-assistant
 
 Step 2: Install dependencies
