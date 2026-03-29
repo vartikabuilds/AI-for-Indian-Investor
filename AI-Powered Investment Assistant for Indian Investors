@@ -1,0 +1,84 @@
+import yfinance as yf
+import numpy as np
+import matplotlib.pyplot as plt
+
+print("AI Investment Assistant (India)\n")
+
+# Step 1: Get Stock Symbol
+ticker = input("Enter Stock Symbol (e.g., TCS.NS, INFY.NS): ").upper()
+
+# Step 2: Fetch Data
+try:
+    stock = yf.Ticker(ticker)
+    data = stock.history(period="1mo")
+
+    if data.empty:
+        print("Invalid stock symbol or no data found.")
+        exit()
+
+except Exception as e:
+    print("Error fetching data:", e)
+    exit()
+
+# Step 3: Analyze Data
+close_prices = data['Close']
+
+# Trend
+trend = "Uptrend" if close_prices.iloc[-1] > close_prices.iloc[0] else "Downtrend"
+
+# Volatility (Risk)
+volatility = np.std(close_prices)
+
+if volatility < 2:
+    risk = "Low"
+elif volatility < 5:
+    risk = "Medium"
+else:
+    risk = "High"
+
+# Step 4: Show Analysis
+print("\nStock Analysis:")
+print("Trend:", trend)
+print("Risk Level:", risk)
+print("Volatility:", round(volatility, 2))
+
+# Step 5: Plot Graph
+plt.plot(close_prices)
+plt.title(f"{ticker} Price Trend (Last 1 Month)")
+plt.xlabel("Days")
+plt.ylabel("Price")
+plt.grid()
+plt.show()
+
+# Step 6: User Input
+print("\nEnter your investment profile:")
+
+while True:
+    user_risk = input("Risk Level (Low/Medium/High): ").capitalize()
+    if user_risk in ["Low", "Medium", "High"]:
+        break
+    print("Invalid input. Try again.")
+
+budget = float(input("Investment Budget (₹): "))
+duration = input("Investment Duration (Short/Long): ").capitalize()
+
+# Step 7: Recommendation Logic
+if trend == "Uptrend":
+    if risk == user_risk:
+        decision = "BUY"
+    else:
+        decision = "HOLD"
+else:
+    decision = "AVOID"
+
+# Step 8: Final Output
+print("\nFINAL RECOMMENDATION:", decision)
+
+print(f"""
+Explanation:
+- Trend detected: {trend}
+- Risk level: {risk}
+- Your risk preference: {user_risk}
+
+Based on analysis, the system suggests: {decision}
+""")
