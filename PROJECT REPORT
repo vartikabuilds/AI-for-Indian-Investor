@@ -1,0 +1,143 @@
+PROJECT REPORT
+
+Title: AI-Powered Investment Assistant for Indian Investors
+Course: Fundamentals of AI and ML (CSA2001)
+Name: Vartika Upadhyay
+Registration No: 25BHI10069
+Faculty: Dr.J.Manikandan
+Institution: VIT Bhopal University
+
+
+INTRODUCTION
+The rapid growth of retail participation in the Indian stock market has led to an increase in the number of individual investors. However, most retail investors lack the tools and expertise required to interpret financial data effectively.
+While platforms like Economic Times Markets provide extensive market data, the complexity of this data makes it difficult for beginners to derive actionable insights.
+This project aims to bridge this gap by developing an AI-powered system that simplifies financial data and provides personalized investment insights.
+
+
+Problem Statement
+India has 14 crore+ demat accounts, but most retail investors are flying blind - reacting to tips, missing filings, unable to read technicals, and managing mutual fund portfolios on gut feel. ET Markets has the data. Build the intelligence layer that turns data into actionable, money-making decisions. 
+
+
+Functional Requirements
+The system provides the following functionalities:
+User registration and profile management
+Input of investor preferences (risk, budget, duration)
+Retrieval of stock market data
+Analysis of stock trends and performance
+AI-based recommendation generation
+Visualization of stock trends and insights
+Display of simplified investment suggestions 
+
+
+Non-Functional Requirements
+Performance: System should respond quickly to user queries
+Usability: Interface should be simple and beginner-friendly
+Security: User data must be protected
+Reliability: System should provide consistent results
+Scalability: Should support multiple users simultaneously
+Maintainability: Code should be modular and easy to update
+
+
+System Architecture
+The system follows a modular architecture:
+Frontend: User interface for interaction
+Backend: Handles logic and processing
+Intelligence Engine: Generates insights
+Data Source: Stock APIs or datasets
+FLOW : User → Frontend → Backend → Intelligence Engine → Data → Output
+
+
+Design Diagrams
+Use Case Diagram
+Actors:
+User
+Use cases:
+Register/Login
+Input preferences
+View insights
+Get recommendations
+
+
+Workflow Diagram
+User logs in
+Inputs investment preferences
+System fetches market data
+Intelligence engine analyzes data
+Recommendations displayed
+Sequence Diagram
+User → UI → Backend → Data API → Intelligence Engine → Response → User
+
+Class Diagram
+Classes:
+User
+Stock
+Recommendation
+Portfolio
+
+ER Diagram
+Entities:
+User
+Preferences
+Stock Data
+Recommendations
+Relationships:
+User → has → Preferences
+Preferences → generate → Recommendations
+
+
+Design Decisions & Rationale
+A modular architecture was chosen to ensure scalability and maintainability
+Rule-based AI was used for simplicity and interpretability
+Visualization was included to improve usability
+Focus was kept on decision support rather than prediction accuracy
+
+
+Implementation Details
+Technologies used:
+Python (Pandas, NumPy)
+APIs (e.g., yfinance)
+Frontend (HTML/CSS/JS or React)
+Visualization (Matplotlib/Chart.js)
+
+
+Key features implemented:
+Data fetching
+Trend analysis
+Risk-based recommendations
+
+
+Testing Approach
+Unit testing for individual modules
+Input validation testing
+Edge case testing (invalid inputs)
+Output verification
+
+
+ Challenges Faced
+Understanding financial data
+Integrating APIs
+Designing meaningful recommendations
+Handling real-time data
+
+
+Learnings & Key Takeaways
+Practical application of course concepts
+Importance of clean architecture
+Handling real-world data
+Improving problem-solving skills
+
+
+Future Enhancements
+Advanced ML models for prediction
+Real-time alerts
+Portfolio tracking
+Integration with live trading platforms
+Mobile application
+
+
+References
+Economic Times Markets
+Stock market APIs (e.g., yfinance)
+Course materials
+Online documentation 
+
