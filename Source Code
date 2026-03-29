@@ -1,0 +1,190 @@
+Project Structure
+
+ai-investor-assistant/
+
+main.py
+
+data_fetcher.py
+
+analyzer.py
+
+recommender.py
+
+user_profile.py
+
+visualizer.py
+
+
+requirements.txt
+
+yfinance
+
+pandas
+
+numpy
+
+matplotlib
+
+
+data_fetcher.py
+
+import yfinance as yf
+
+def get_stock_data(ticker):
+   try:
+        stock = yf.Ticker(ticker)
+        data = stock.history(period="1mo")
+
+        if data.empty:
+            raise ValueError("No data found for ticker")
+
+        return data
+
+    except Exception as e:
+        print(f"Error fetching data: {e}")
+        return None
+
+
+analyzer.py
+
+import numpy as np
+
+def analyze_stock(data):
+    close_prices = data['Close']
+
+    # Trend Detection
+    trend = "Uptrend" if close_prices.iloc[-1] > close_prices.iloc[0] else "Downtrend"
+
+    # Volatility (Risk Calculation)
+    volatility = np.std(close_prices)
+
+    if volatility < 2:
+        risk = "Low"
+    elif volatility < 5:
+        risk = "Medium"
+    else:
+        risk = "High"
+
+    return {
+        "trend": trend,
+        "risk": risk,
+        "volatility": round(volatility, 2)
+    }
+
+
+    user_profile.py
+
+
+    def get_user_profile():
+    print("\nEnter your investment details:")
+
+    while True:
+        risk = input("Risk Level (Low/Medium/High): ").capitalize()
+        if risk in ["Low", "Medium", "High"]:
+            break
+        print("Invalid input. Try again.")
+
+    budget = float(input("Investment Budget (₹): "))
+    duration = input("Investment Duration (Short/Long): ").capitalize()
+
+    return {
+        "risk": risk,
+        "budget": budget,
+        "duration": duration
+    }
+
+
+    recommender.py
+
+    def recommend(analysis, user):
+    trend = analysis["trend"]
+    risk = analysis["risk"]
+    user_risk = user["risk"]
+
+    # Decision Logic
+    if trend == "Uptrend":
+        if risk == user_risk:
+            decision = "BUY"
+        else:
+            decision = "HOLD"
+    else:
+        decision = "AVOID"
+
+    # Explanation
+    explanation = f"""
+    📊 Trend: {trend}
+    ⚠️ Risk Level: {risk}
+
+    Based on your selected risk profile ({user_risk}),
+    the system suggests: {decision}
+
+    Reason:
+    - Trend analysis indicates a {trend.lower()}
+    - Risk level is {risk.lower()}, compared with your preference
+    """
+
+    return decision, explanation
+
+
+    visualizer.py
+
+    import matplotlib.pyplot as plt
+
+def plot_stock(data, ticker):
+    plt.figure()
+    plt.plot(data['Close'])
+    plt.title(f"{ticker} Price Trend (Last 1 Month)")
+    plt.xlabel("Days")
+    plt.ylabel("Price")
+    plt.grid()
+    plt.show()
+
+
+    main.py
+
+    from data_fetcher import get_stock_data
+from analyzer import analyze_stock
+from recommender import recommend
+from user_profile import get_user_profile
+from visualizer import plot_stock
+
+def main():
+    print("📊 AI Investment Assistant (India)")
+
+    ticker = input("\nEnter Stock Symbol (e.g., TCS.NS, INFY.NS): ").upper()
+
+    # Fetch Data
+    data = get_stock_data(ticker)
+    if data is None:
+        return
+
+    # Analyze
+    analysis = analyze_stock(data)
+
+    print("\n📈 Stock Analysis:")
+    print(f"Trend: {analysis['trend']}")
+    print(f"Risk: {analysis['risk']}")
+    print(f"Volatility: {analysis['volatility']}")
+
+    # Plot Graph
+    plot_stock(data, ticker)
+
+    # User Input
+    user = get_user_profile()
+
+    # Recommendation
+    decision, explanation = recommend(analysis, user)
+
+    print("\n💡 FINAL RECOMMENDATION:", decision)
+    print(explanation)
+
+if __name__ == "__main__":
+    main()
+
+
+How to Run?
+
+pip install -r requirements.txt
+python main.py
+
+    
